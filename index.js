@@ -1,8 +1,7 @@
 import dotenv from 'dotenv';
-const result = dotenv.config();
-console.log('dotenv result:', result);
-console.log('GOOGLE_CLIENT_ID:', process.env.GOOGLE_CLIENT_ID);
-console.log('GOOGLE_CLIENT_SECRET:', process.env.GOOGLE_CLIENT_SECRET);
+dotenv.config();
+
+// All other imports must come after dotenv
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
