@@ -1,7 +1,11 @@
+import dotenv from 'dotenv';
+const result = dotenv.config();
+console.log('dotenv result:', result);
+console.log('GOOGLE_CLIENT_ID:', process.env.GOOGLE_CLIENT_ID);
+console.log('GOOGLE_CLIENT_SECRET:', process.env.GOOGLE_CLIENT_SECRET);
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
-import dotenv from 'dotenv';
 import authRoutes from './routes/auth.js';
 import rideRequestRoutes from './routes/rideRequests.js';
 import tripRoutes from './routes/trips.js';
@@ -10,7 +14,6 @@ import settingsRoutes from './routes/settings.js';
 import session from 'express-session';
 import passport from 'passport';
 
-dotenv.config();
 
 const app = express();
 app.use(cors());
