@@ -11,8 +11,8 @@ const router = express.Router();
 
 // Google OAuth setup
 passport.use(new GoogleStrategy({
-  clientID: process.env.GOOGLE_CLIENT_ID,
-  clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+  clientID: 'YOUR_HARDCODED_CLIENT_ID', // <-- Hardcoded client ID
+  clientSecret: 'YOUR_HARDCODED_CLIENT_SECRET', // <-- Hardcoded client secret
   callbackURL: '/api/auth/google/callback',
 }, async (accessToken, refreshToken, profile, done) => {
   try {
@@ -64,7 +64,8 @@ router.post('/register', async (req, res) => {
     await user.save();
     res.status(201).json({ message: 'User registered successfully' });
   } catch (err) {
-    res.status(500).json({ message: 'Server error' });
+    console.error(err);
+    res.status(500).json({ message: err.message || 'Server error', error: err });
   }
 });
 

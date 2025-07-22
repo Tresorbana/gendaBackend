@@ -1,0 +1,102 @@
+{
+  "info": {
+    "name": "Uber Backend API",
+    "_postman_id": "uber-backend-api-collection",
+    "description": "Test all Uber backend routes",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Register",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Test User\",\n  \"email\": \"testuser@example.com\",\n  \"phone\": \"1234567890\",\n  \"password\": \"TestPassword123\",\n  \"role\": \"customer\"\n}"
+        },
+        "url": { "raw": "http://localhost:4000/api/auth/register", "protocol": "http", "host": ["localhost"], "port": "4000", "path": ["api", "auth", "register"] }
+      }
+    },
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"testuser@example.com\",\n  \"password\": \"TestPassword123\"\n}"
+        },
+        "url": { "raw": "http://localhost:4000/api/auth/login", "protocol": "http", "host": ["localhost"], "port": "4000", "path": ["api", "auth", "login"] }
+      }
+    },
+    {
+      "name": "Forgot Password",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"testuser@example.com\"\n}"
+        },
+        "url": { "raw": "http://localhost:4000/api/auth/forgot-password", "protocol": "http", "host": ["localhost"], "port": "4000", "path": ["api", "auth", "forgot-password"] }
+      }
+    },
+    {
+      "name": "Reset Password",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"token\": \"<reset_token>\",\n  \"password\": \"NewPassword123\"\n}"
+        },
+        "url": { "raw": "http://localhost:4000/api/auth/reset-password", "protocol": "http", "host": ["localhost"], "port": "4000", "path": ["api", "auth", "reset-password"] }
+      }
+    },
+    {
+      "name": "Create Trip",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"driverId\": \"<driver_id>\",\n  \"customerId\": \"<customer_id>\",\n  \"from\": \"A\",\n  \"to\": \"B\",\n  \"fare\": 20.5\n}"
+        },
+        "url": { "raw": "http://localhost:4000/api/trips", "protocol": "http", "host": ["localhost"], "port": "4000", "path": ["api", "trips"] }
+      }
+    },
+    {
+      "name": "Create Ride Request",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"customerId\": \"<customer_id>\",\n  \"from\": \"A\",\n  \"to\": \"B\",\n  \"fare\": 15.0\n}"
+        },
+        "url": { "raw": "http://localhost:4000/api/ride-requests", "protocol": "http", "host": ["localhost"], "port": "4000", "path": ["api", "ride-requests"] }
+      }
+    },
+    {
+      "name": "Add Payment Method",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"userId\": \"<user_id>\",\n  \"type\": \"card\",\n  \"details\": { \"cardNumber\": \"1234-5678-9012-3456\" },\n  \"isDefault\": true\n}"
+        },
+        "url": { "raw": "http://localhost:4000/api/payment-methods", "protocol": "http", "host": ["localhost"], "port": "4000", "path": ["api", "payment-methods"] }
+      }
+    },
+    {
+      "name": "Get User Settings",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": { "raw": "http://localhost:4000/api/settings/user/<user_id>", "protocol": "http", "host": ["localhost"], "port": "4000", "path": ["api", "settings", "user", "<user_id>"] }
+      }
+    }
+  ]
+}
