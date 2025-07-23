@@ -110,4 +110,29 @@ export const resetPassword = async (req, res) => {
   } catch (err) {
     res.status(500).json({ message: err.message || 'Server error', error: err });
   }
+};
+
+// Verify OTP and login
+export const verifyOtp = async (req, res) => {
+  try {
+    const { email, phone, code } = req.body;
+    // Find user by email or phone and not yet verified
+    const user = await User.findOne({
+      $or: [
+        { email },
+        { phone }
+      ],
+      verified: false
+    });
+    if (!user) return res.status(400).json({ success: false, error: 'User not found or already verified' });
+    if (user.otp !== code) return res.status(400).json({ success: false, error: 'Invalid OTP code' });
+    user.verified = true;
+    user.otp = undefined;
+    await user.save();
+    // Issue JWT
+    const token = jwt.sign({ userId: user._id, role: user.role }, process.env.JWT_SECRET || 'uber_jwt_secret', { expiresIn: '1d' });
+    res.json({ success: true, token, user: { id: user._id, name: user.name, email: user.email, role: user.role } });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message || 'Server error' });
+  }
 }; 

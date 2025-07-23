@@ -6,6 +6,7 @@ import nodemailer from 'nodemailer';
 import crypto from 'crypto';
 import passport from 'passport';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
+import { verifyOtp } from '../controllers/auth.controller.js';
 
 const router = express.Router();
 
@@ -135,6 +136,9 @@ router.post('/reset-password', async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
+
+// Verify OTP
+router.post('/verify-otp', verifyOtp);
 
 // JWT middleware for protected routes
 export function verifyToken(req, res, next) {
