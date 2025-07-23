@@ -11,6 +11,7 @@ const userSchema = new mongoose.Schema({
   balance: { type: Number, default: 0 },
   rating: { type: Number, default: 5 },
   verified: { type: Boolean, default: false },
+  otp: { type: String },
   resetPasswordToken: { type: String },
   resetPasswordExpires: { type: Date },
   car: {
